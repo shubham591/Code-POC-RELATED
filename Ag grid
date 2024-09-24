@@ -1,10 +1,5 @@
-<ag-grid-angular
-  style="width: 100%; height: 500px;"
-  class="ag-theme-alpine"
-  [rowData]="rowData"
-  [columnDefs]="columnDefs">
-</ag-grid-angular>
-
+@import "~ag-grid-community/styles/ag-grid.css";
+@import "~ag-grid-community/styles/ag-theme-alpine.css";
 ----
 <ag-grid-angular
   style="width: 100%; height: 500px;"
