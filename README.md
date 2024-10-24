@@ -6,7 +6,7 @@ WITH DuplicateStatusCodes AS (
     WHERE 
         status_code IN (5, 7)  -- Assuming 5 = draft, 7 = rework
     GROUP BY status_code
-    HAVING COUNT(*) > 1  -- Only status codes with more than one entry
+    HAVING COUNT(*) > 1  -- Identify status codes that have more than one entry
 ),
 CTE AS (
     SELECT 
@@ -16,11 +16,11 @@ CTE AS (
     FROM 
         audit_status_table
     WHERE 
-        status_code IN (SELECT status_code FROM DuplicateStatusCodes)
+        status_code IN (SELECT status_code FROM DuplicateStatusCodes)  -- Process only duplicate groups
 )
 DELETE FROM audit_status_table
 WHERE status_id IN (
     SELECT status_id 
     FROM CTE 
-    WHERE rn > 1  -- Delete only duplicate entries, keep the first one
+    WHERE rn > 1  -- Only delete rows with rn > 1 (i.e., duplicates)
 );
