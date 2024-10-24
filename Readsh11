@@ -1,0 +1,14 @@
+DELETE FROM your_table_name
+WHERE id IN (
+    SELECT id
+    FROM (
+        SELECT 
+            id,
+            ROW_NUMBER() OVER (PARTITION BY status_code ORDER BY created_at) AS rn
+        FROM 
+            your_table_name
+        WHERE 
+            status_code IN (5, 7)
+    ) AS subquery
+    WHERE rn > 1
+);
