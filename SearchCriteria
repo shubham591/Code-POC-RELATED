@@ -1,0 +1,92 @@
+if (StringUtils.isNotBlank(nrrSearchCriteria.getFreeText())) {
+    String freeText = "%" + nrrSearchCriteria.getFreeText().trim().toLowerCase() + "%";  // Standardize free text input
+
+    List<Predicate> freeTextPredicates = new ArrayList<>();
+
+    // Records Series Label (EN & FR)
+    freeTextPredicates.add(
+        criteriaBuilder.like(
+            criteriaBuilder.lower(root.get(RetentionRule_.RECORDS_SERIES_LABEL_EN)), 
+            freeText
+        )
+    );
+    freeTextPredicates.add(
+        criteriaBuilder.like(
+            criteriaBuilder.lower(root.get(RetentionRule_.RECORDS_SERIES_LABEL_FR)), 
+            freeText
+        )
+    );
+
+    // Records Series Description (EN & FR)
+    freeTextPredicates.add(
+        criteriaBuilder.like(
+            criteriaBuilder.lower(root.get(RetentionRule_.RECORDS_SERIES_DESCRIPTION_EN)), 
+            freeText
+        )
+    );
+    freeTextPredicates.add(
+        criteriaBuilder.like(
+            criteriaBuilder.lower(root.get(RetentionRule_.RECORDS_SERIES_DESCRIPTION_FR)), 
+            freeText
+        )
+    );
+
+    // Records Series Example (EN & FR)
+    freeTextPredicates.add(
+        criteriaBuilder.like(
+            criteriaBuilder.lower(root.get(RetentionRule_.RECORDS_SERIES_EXAMPLE_EN)), 
+            freeText
+        )
+    );
+    freeTextPredicates.add(
+        criteriaBuilder.like(
+            criteriaBuilder.lower(root.get(RetentionRule_.RECORDS_SERIES_EXAMPLE_FR)), 
+            freeText
+        )
+    );
+
+    // Rationale Basis (EN & FR)
+    freeTextPredicates.add(
+        criteriaBuilder.like(
+            criteriaBuilder.lower(root.get(RetentionRule_.RATIONALE_BASIS_EN)), 
+            freeText
+        )
+    );
+    freeTextPredicates.add(
+        criteriaBuilder.like(
+            criteriaBuilder.lower(root.get(RetentionRule_.RATIONALE_BASIS_FR)), 
+            freeText
+        )
+    );
+
+    // Trigger Detail (EN & FR)
+    freeTextPredicates.add(
+        criteriaBuilder.like(
+            criteriaBuilder.lower(root.get(RetentionRule_.TRIGGER_DETAIL_EN)), 
+            freeText
+        )
+    );
+    freeTextPredicates.add(
+        criteriaBuilder.like(
+            criteriaBuilder.lower(root.get(RetentionRule_.TRIGGER_DETAIL_FR)), 
+            freeText
+        )
+    );
+
+    // Comment (EN & FR)
+    freeTextPredicates.add(
+        criteriaBuilder.like(
+            criteriaBuilder.lower(root.get(RetentionRule_.COMMENT_EN)), 
+            freeText
+        )
+    );
+    freeTextPredicates.add(
+        criteriaBuilder.like(
+            criteriaBuilder.lower(root.get(RetentionRule_.COMMENT_FR)), 
+            freeText
+        )
+    );
+
+    // Combine all predicates with OR logic
+    predicates.add(criteriaBuilder.or(freeTextPredicates.toArray(new Predicate[0])));
+}
