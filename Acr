@@ -1,0 +1,32 @@
+Here’s a more structured and refined version of your points for your OKR discussion:
+
+Key Achievements and Contributions (2024)
+
+	1.	Planning and Roadmap Creation
+	•	Actively participated in PI planning to define the development roadmap for each quarter.
+	2.	Sprint Management and Delivery
+	•	Maintained sprint boards by creating and updating tickets with detailed descriptions.
+	•	Delivered assigned stories on time and with quality, including:
+	•	Features:
+	•	NRR mass delete and validate functionality.
+	•	Async NRR export and advanced NRR filters.
+	•	Application referential auto-update.
+	•	RR and ORR standardization.
+	•	ORR and NRR new UI screens.
+	•	Enhancements:
+	•	NRR export notification.
+	•	PCT-related updates and feature improvements.
+	•	Production Support:
+	•	Addressed priority production bugs promptly and ensured timely delivery.
+	3.	Testing and Quality Assurance
+	•	Collaborated with the team to create and implement a comprehensive testing plan, reducing production bugs and improving application maintainability.
+	4.	Code Quality and Knowledge Sharing
+	•	Worked in chapter meetings to address SonarQube issues and improve code quality.
+	•	Conducted knowledge-sharing sessions to foster team growth.
+	5.	Innovations and Initiatives
+	•	Successfully implemented a prohibition technique on both backend and frontend.
+	•	Participated in a hackathon event, creating a wrapper around SOgpt to enable non-technical team members to interact with the database easily.
+	6.	Skill Enhancement
+	•	Completed in-house training on Azure Cloud to enhance technical knowledge and proficiency.
+
+This version is concise and organized, highlighting your achievements effectively while maintaining a professional tone. Let me know if you’d like further refinements!
