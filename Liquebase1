@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <!-- Update trigger_type to OTHER in drm_operational_retention_rule -->
+    <changeSet id="20250122-update-trigger-type" author="your_name">
+        <comment>Update trigger_type to OTHER where it is NULL and status is in (3, 5, 6)</comment>
+        <update tableName="drm_operational_retention_rule">
+            <column name="trigger_type" value="OTHER" />
+            <where>trigger_type IS NULL AND status IN (3, 5, 6)</where>
+        </update>
+    </changeSet>
+
+    <!-- Update input_level to 1 in drm_orr_info -->
+    <changeSet id="20250122-update-input-level" author="your_name">
+        <comment>
+            Update input_level to 1 where it is NULL, and the corresponding
+            drm_operational_retention_rule has status in (3, 5, 6)
+        </comment>
+        <update tableName="drm_orr_info">
+            <column name="input_level" value="1" />
+            <where>
+                input_level IS NULL AND EXISTS (
+                    SELECT 1
+                    FROM drm_operational_retention_rule orr
+                    WHERE orr.id = drm_orr_info.id
+                    AND orr.version = drm_orr_info.version
+                    AND orr.status IN (3, 5, 6)
+                )
+            </where>
+        </update>
+    </changeSet>
+
+</databaseChangeLog>
