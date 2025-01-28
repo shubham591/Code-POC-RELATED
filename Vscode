@@ -1,0 +1,21 @@
+{
+  // Exclude specific folders from the Explorer (File Tree View)
+  "files.exclude": {
+    "**/node_modules": true,
+    "**/dist": true,
+    "**/coverage": true
+  },
+
+  // Exclude specific folders from search
+  "search.exclude": {
+    "**/node_modules": true,
+    "**/dist": true,
+    "**/coverage": true
+  },
+
+  // Additional settings (optional)
+  "editor.tabSize": 2,               // Example of custom editor setting
+  "editor.formatOnSave": true,       // Automatically format files on save
+  "files.autoSave": "afterDelay",    // Auto-save files after a short delay
+  "typescript.tsserver.log": "off"  // Disable TypeScript server logging (can improve performance)
+}
