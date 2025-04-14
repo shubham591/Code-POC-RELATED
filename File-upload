@@ -1,0 +1,47 @@
+ngOnInit() {
+  const userProfiles = this.userProfileInfoService.getUserProfileInfo();
+  const isAdmin = userProfiles?.isAdmin;
+  const isCreator = userProfiles?.normativeRetentionRule?.isCreator;
+  const isValidator = userProfiles?.normativeRetentionRule?.isValidator;
+
+  // Full list
+  this.uploadTypes = [
+    { id: 'CREATE', labelEn: en.bulk_task.file_loading.nrr_creation, labelFr: fr.bulk_task.file_loading.nrr_creation },
+    { id: 'UPDATE', labelEn: en.bulk_task.file_loading.nrr_update, labelFr: fr.bulk_task.file_loading.nrr_update },
+    { id: 'MASS_SUBSCRIBE', labelEn: en.bulk_task.file_loading.nrr_mass_subscribe, labelFr: fr.bulk_task.file_loading.nrr_mass_subscribe },
+  ];
+
+  // Allowed selections
+  this.allowedUploadTypeIds = [];
+
+  if (isAdmin) {
+    this.allowedUploadTypeIds = this.uploadTypes.map(type => type.id); // allow all
+  } else {
+    if (isCreator) {
+      this.allowedUploadTypeIds.push('CREATE', 'UPDATE');
+    }
+    if (isValidator) {
+      this.allowedUploadTypeIds.push('MASS_SUBSCRIBE');
+    }
+  }
+} 
+========
+onUploadTypeChange(selected: string) {
+  if (!this.allowedUploadTypeIds.includes(selected)) {
+    this.selectedUploadType = null;
+    this.toastService.showError('You are not authorized to select this upload type.');
+  }
+}
+==========
+<ng-select
+  [(ngModel)]="selectedUploadType"
+  (change)="onUploadTypeChange($event)"
+  placeholder="{{ 'bulk_task.file_loading.select_upload_type' | translate }}">
+  <ng-option 
+    *ngFor="let uploadType of uploadTypes" 
+    [value]="uploadType.id"
+    [disabled]="!allowedUploadTypeIds.includes(uploadType.id)">
+    {{ currentLang === 'en' ? uploadType.labelEn : uploadType.labelFr }}
+  </ng-option>
+</ng-select>
+==========
